@@ -11,7 +11,7 @@ import kotlin.math.max
  * difficult they are to press.
  */
 @Suppress("unused")
-enum class KeyLayout(private val rows: Array<String>) {
+enum class KeyLayout(val rows: Array<String>) {
   QWERTY(arrayOf("qwertyuiop", "asdfghjkl;", "zxcvbnm,./")),
   HYROLL(arrayOf("pclmvkuoy`", "nsrtd.aeih", "fg'wqx,zjb"));
 
@@ -39,9 +39,9 @@ enum class KeyLayout(private val rows: Array<String>) {
 
   inner class Bigram(private val key1: Key, private val key2: Key)
   {
-    val weight by lazy { getWeight() }
+    val weight by lazy { getWeightInternal() }
 
-    private fun getWeight() : Int {
+    private fun getWeightInternal() : Int {
       val bigramKindWeight = getBigramKind().weight
       val key1ColumnWeight = key1.columnWeight
       val key2ColumnWeight = key2.columnWeight
