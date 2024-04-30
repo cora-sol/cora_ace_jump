@@ -69,7 +69,7 @@ fun CharSequence.countMatchingCharacters(selfOffset: Int, otherText: String): In
  * Determines which characters form a "word" for the purposes of functions below.
  */
 val Char.isWordPart
-  get() = this.isJavaIdentifierPart()
+  get() = this.isJavaIdentifierPart() // Reverted isISOControl
 
 /**
  * Finds index of the first character in a word.

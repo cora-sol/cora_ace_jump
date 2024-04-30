@@ -110,7 +110,6 @@ internal class Solver private constructor(
     val siteOrder = siteOrder(caches)
     val tagOrder = KeyLayoutCache.tagOrder
       .thenComparingInt { eligibleSitesByTag.getValue(it).size }
-      .thenBy(AceConfig.layout.priority(String::last))
 
     val sortedTags = eligibleSitesByTag.keys.toMutableList().apply {
       sortWith(tagOrder)

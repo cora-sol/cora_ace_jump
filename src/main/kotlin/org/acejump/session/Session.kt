@@ -119,7 +119,7 @@ class Session(private val mainEditor: Editor, private val jumpEditors: List<Edit
     if (!markImmediately &&
       query.rawText.let {
         it.length < AceConfig.minQueryLength &&
-          it.all(Char::isLetterOrDigit)
+          it.all(Char::isISOControl)
       }
     ) {
       return

@@ -30,15 +30,11 @@ internal object KeyLayoutCache {
    * Re-initializes cached data according to updated settings.
    */
   fun reset(settings: AceSettings) {
-    tagOrder = compareBy(
-      { it[0].isDigit() || it[1].isDigit() },
-      { settings.layout.distanceBetweenKeys(it[0], it[1]) },
-      settings.layout.priority { it[0] }
-    )
+    tagOrder = compareBy<String> { settings.layout.bigramWeight(it[0], it[1]) }.reversed()
     
     val allPossibleChars = settings.allowedChars
       .toCharArray()
-      .filter(Char::isLetterOrDigit)
+      .filter(Char::isISOControl)
       .distinct()
       .joinToString("")
       .ifEmpty(settings.layout::allChars)
